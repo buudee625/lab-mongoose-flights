@@ -1,7 +1,9 @@
 const Flight = require('../models/flight');
 
 module.exports = {
-    index
+    index,
+    newFlight,
+    create
 }
 
 function index(req, res) {
@@ -9,7 +11,15 @@ function index(req, res) {
         console.log(flightDoc);
 
         res.render('flights/index.ejs', {
-            flight: flightDoc
+            flights: flightDoc
         })
     })
+}
+
+function newFlight(req, res) {
+    res.render('flights/new.ejs')
+}
+
+function create(req, res) {
+    
 }
