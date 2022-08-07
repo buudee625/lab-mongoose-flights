@@ -2,7 +2,35 @@
 
 <body>
     <h1>Create A New Flight</h1>
-    <a href="/flights">Go Back</a>
+
+    <label for="airline">Choose an airline:</label>
+    <select id="airline-dropdown" name="airline">
+      <option value="American">American</option>
+      <option value="Alaska">Alaska</option>
+      <option value="Delta">Delta</option>
+      <option value="Southwest">Southwest</option>
+      <option value="Spirit">Spirit</option>
+      <option value="United">United</option>
+    </select>
+    <br>
+    <label for="airport">Choose an airport:</label>
+    <select id="airport-dropdown" name="airport">
+        <option value="ATL">Atlanta (ATL)</option>
+        <option value="DFW" >Dallas (DFW)</option>
+        <option value="DEN" selected>Denvor (DEN)</option>
+        <option value="LAX">Los Angeles (LAX)</option>
+        <option value="SAN">San Diego (SAN)</option>
+    </select>
+    <br>
+    <form>
+        <label for="flightNo">Flight Number:</label>
+        <input type="text" id="flight-no" name="flightNo">
+    </form>
+    <lable for="departs">Departure Date:</lable>
+    <input type="date" id="depart-date" name="departs">
+    <br>
+    <input type="submit" value="Add Movie">
+    <input type="submit" value="Cancel">
 </body>
 
 <%- include('../partials/footer') %>
