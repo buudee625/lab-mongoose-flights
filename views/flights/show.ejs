@@ -1,0 +1,12 @@
+<%- include('../partials/header') %>
+
+<div>Airline:</div>
+<div><%= flights.airline %></div>
+<div>Airport:</div>
+<div><%= flights.airport %></div>
+<div>Flight Number:</div>
+<div><%= flights.flightNo %></div>
+<div>Departure</div>
+<div><%= flights.departs.toLocaleString() %></div>
+
+<%- include('../partials/footer') %>
