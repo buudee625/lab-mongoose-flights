@@ -1,12 +1,61 @@
 <%- include('../partials/header') %>
 
-<div>Airline:</div>
-<div><%= flights.airline %></div>
-<div>Airport:</div>
-<div><%= flights.airport %></div>
-<div>Flight Number:</div>
-<div><%= flights.flightNo %></div>
-<div>Departure</div>
-<div><%= flights.departs.toLocaleString() %></div>
+<section>
+  <h2>Flight details:</h2>
+  <div>Airline:</div>
+  <div><%= flights.airline %></div>
+  <div>Airport:</div>
+  <div><%= flights.airport %></div>
+  <div>Flight Number:</div>
+  <div><%= flights.flightNo %></div>
+  <div>Departure</div>
+  <div><%= flights.departs.toLocaleString() %></div>
+</section>
 
-<%- include('../partials/footer') %>
+<br /><br />
+<h2>Destinations</h2>
+<form
+  id="destinations-form"
+  action="/flights/<%= flights._id %>/destinations"
+  method="POST"
+>
+  <label for="airline">Choose an airline:</label>
+  <select id="airport-dropdown" name="airport">
+    <option value="ATL">Austin (AUS)</option>
+    <option value="DFW">Dallas (DFW)</option>
+    <option value="DEN" selected>Denver (DEN)</option>
+    <option value="LAX">Los Angeles (LAX)</option>
+    <option value="SAN">San Diego (SAN)</option>
+  </select>
+  <br />
+  <label for="arrival" name="arrival">Arrival Date:</label>
+  <input
+    type="datetime-local"
+    id="depart-date"
+    name="arrival"
+    min="2023-01-01T00:00"
+  />
+  <br />
+  <button type="submit">Add A Destination</button>
+</form>
+<% if (flights.destinations.length) {%>
+<table>
+  <thead>
+    <tr>
+      <th>Airport</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% flights.destinations.forEach(function(i) { %>
+    <tr>
+      <td><%= i.airport %></td>
+      <td><%= i.arrival.toLocaleString() %></td>
+    </tr>
+    <% }); %>
+  </tbody>
+</table>
+
+<% } else { %>
+<h5>Nothing bruv</h5>
+<% } %> <%- include('../partials/footer') %>
