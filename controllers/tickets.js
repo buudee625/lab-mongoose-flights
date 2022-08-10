@@ -22,10 +22,11 @@ function create(req, res) {
 }
 
 function addTicketToFlight(req, res) {
-  console.log(req.params.id, "<- params.id");
   Flight.findById(req.params.id, function (err, flightDoc) {
-    console.log(flightDoc, "<- flightDoc");
-    flightDoc.ticket.push(req.body);
+    // console.log(flightDoc.ticket, "<-- flightDoc.ticket from AT2F() BEFORE");
+    // console.log(req.body.ticketId, "<-- req.body.ticketId from AT2F()");
+    flightDoc.ticket.push(req.body.ticketId);
+    // console.log(flightDoc.ticket, "<-- flightDoc.ticket from AT2F() AFTER");
     flightDoc.save(function (err) {
       res.redirect(`/flights/${flightDoc._id}`);
     });

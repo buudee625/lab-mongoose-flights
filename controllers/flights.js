@@ -1,4 +1,5 @@
 const Flight = require("../models/flight");
+const Ticket = require("../models/ticket");
 
 module.exports = {
   index,
@@ -34,13 +35,32 @@ function create(req, res) {
 }
 
 function show(req, res) {
-  // console.log(req.params.id, "<--- req.params.id from flights/show()");
+  // console.log(req.params.id, "<--- req.params.id from show()");
   Flight.findById(req.params.id)
     // .populate("ticket")
     .exec(function (err, flightDoc) {
-      // console.log(flightDoc, "<--- flightDoc from flights/show()");
-      res.render("flights/show.ejs", {
-        flights: flightDoc,
+      // console.log(flightDoc, "<--- flightDoc from show()");
+      Ticket.find({}, function (err, ticketDoc) {
+        // console.log(ticketDoc, "<-- ticketDoc from show()");
+        res.render("flights/show.ejs", {
+          flights: flightDoc,
+          tickets: ticketDoc,
+        });
       });
     });
 }
+
+// async function show(req, res) {
+//   try {
+//     const flightDoc = await Flight.findById(req.params.id).exec();
+//     const ticketDoc = await Ticket.findById({
+//       _id: { $nin: flightDoc.ticket },
+//     });
+//     res.render("flights/show.ejs", {
+//       flights: flightDoc,
+//       tickets: ticketDoc,
+//     });
+//   } catch (err) {
+//     res.send(err);
+//   }
+// }
