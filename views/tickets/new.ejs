@@ -1,0 +1,25 @@
+<%- include('../partials/header') %>
+
+<h1>Generate A New Ticket</h1>
+<form id="new-ticket-form" action="/tickets" method="POST">
+  <div>Seat Number:</div>
+  <input
+    type="text"
+    name="seat"
+    value="A1 thru F99"
+    required
+    pattern="[A-F][1-9]\d?"
+  />
+  <br />
+  <small
+    >Requiremenets: Must have a letter A through F and a number 1 to 99</small
+  >
+
+  <br /><br />
+  <div>Ticket Price:</div>
+  <input type="text" name="price" value="Enter Price" />
+  <br /><br />
+  <input type="submit" value="Add Ticket" />
+</form>
+
+<%- include('../partials/footer') %>
