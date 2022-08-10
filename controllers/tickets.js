@@ -4,30 +4,30 @@ const Flight = require("../models/flight");
 module.exports = {
   newTicket,
   create,
+  addTicketToFlight,
 };
 
 function newTicket(req, res) {
-  Ticket.findById({}, function (err, TixDoc) {
-    res.render("../views/tickets/new", {
-      title: "Add New Ticket",
-      ticket: TixDoc,
+  Flight.findById(req.params.id, function (err, flightDoc) {
+    res.render("tickets/new.ejs", {
+      flights: flightDoc,
     });
   });
 }
 
 function create(req, res) {
-  Ticket.create(req.body, function (err, TicketDoc) {
-    console.log(TicketDoc, "<- TicketDoc from create()");
-    res.redirect("/tickets/new");
+  Ticket.create(req.body, function (err, TixDoc) {
+    res.redirect(`/flights/${req.params.id}`);
   });
 }
 
-// function addTicketToFlight(req, res) {
-//   console.log(req.params.id, "<- params.id");
-//   Flight.findById(req.params.id, function (err, flightDoc) {
-//     console.log(flightDoc, "<- flightDoc");
-//     flightDoc.save(function (err) {
-//       res.send("Done!");
-//     });
-//   });
-// }
+function addTicketToFlight(req, res) {
+  console.log(req.params.id, "<- params.id");
+  Flight.findById(req.params.id, function (err, flightDoc) {
+    console.log(flightDoc, "<- flightDoc");
+    flightDoc.ticket.push(req.body);
+    flightDoc.save(function (err) {
+      res.redirect(`/flights/${flightDoc._id}`);
+    });
+  });
+}

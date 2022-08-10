@@ -57,5 +57,11 @@
 </table>
 
 <% } else { %>
-<h5>Nothing bruv</h5>
-<% } %> <%- include('../partials/footer') %>
+<h5>No destination has been set yet.</h5>
+ <% } %> 
+ <form action="<%= flights._id %>/tickets/new">
+    <button type="submit">New Ticket</button>   
+ </form>
+
+ 
+ <%- include('../partials/footer') %> </a>

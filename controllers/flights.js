@@ -20,8 +20,8 @@ function newFlight(req, res) {
 }
 
 function create(req, res) {
-  //   console.log(req.body, "<-- req.body");
-  console.log(req.body.departs, "<-- req.body.departs");
+  // console.log(req.body, "<-- req.body");
+  // console.log(req.body.departs, "<-- req.body.departs");
   Flight.create(req.body, function (err, flightsDoc) {
     if (err) {
       console.log(err, "<-- err in flight create func");
@@ -34,9 +34,13 @@ function create(req, res) {
 }
 
 function show(req, res) {
-  Flight.findById(req.params.id, function (err, flightDoc) {
-    res.render("flights/show.ejs", {
-      flights: flightDoc,
+  // console.log(req.params.id, "<--- req.params.id from flights/show()");
+  Flight.findById(req.params.id)
+    // .populate("ticket")
+    .exec(function (err, flightDoc) {
+      // console.log(flightDoc, "<--- flightDoc from flights/show()");
+      res.render("flights/show.ejs", {
+        flights: flightDoc,
+      });
     });
-  });
 }
